@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import modals.User;
 
 public class MainControler {
 
@@ -19,7 +20,12 @@ public class MainControler {
 	private TextField textpassword;
 	
 	public void Login(ActionEvent event) throws Exception{
-		if (textusername.getText().equals("user") && textpassword.getText().equals("pass")) {
+		User us = User.getInstance();
+		
+		String user = textusername.getText();
+		String pass = textpassword.getText();
+		
+		if (us.checkLogin(user, pass)) {
 			 Sid.setText("Login Success");
 			 Stage primaryStage = new Stage();
 			 Parent root = FXMLLoader.load(getClass().getResource("/application/Main.fxml"));
